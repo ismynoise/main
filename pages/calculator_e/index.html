@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ru" manifest="/offline.manifest">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Calculator</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <!-- <h1>Calculator</h1> -->
+  <div class="bg"></div>
+  <div class="main">
+    <table>
+      <tr>
+        <td class="text">Напряжение (V):</td>
+        <td>
+          <select id="textSelect" class="text-select" name="v" onchange="selectedV()">
+            <option selected value="220">220</option>
+            <option value="380">380</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td class="text">Ток (A):</td>
+        <td><input id="textViewA" class="text-view" type="text" value="16" onkeyup="setAmp()"></td>
+      </tr>
+      <tr>
+        <td class="text">Мощность (kW):</td>
+        <td><input id="textViewKw" class="text-view" type="text" value="3.5" onkeyup="setKw()"></td>
+      </tr>
+    </table>
+  </div>
+  <script src="js/script.js"></script>
+</body>
+
+</html>

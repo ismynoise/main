@@ -83,7 +83,7 @@
     color: #fff;
 }
 
-/*--- section ---*/
+/*--- section contact ---*/
 
 .container {
     display: flex;
@@ -92,6 +92,7 @@
 }
 
 .link-img {
+    text-decoration: none;
     width: 96px;
     padding: 30px;
     margin: 2px;
@@ -103,4 +104,9 @@
 
 .link-img img {
     max-width: 100%;
+}
+
+.link-img h3 {
+    color: #7e7e7e;
+    text-align: center;
 }

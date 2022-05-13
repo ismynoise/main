@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wire</title>
+    <link rel="stylesheet" href="Resource/css/style.css">
+</head>
+
+<body>
+    <div class="conteiner">
+        <div class="box-1">
+            <select onchange="settype(event)" class="dropdown">
+                <option value="1">Wire</option>
+                <option value="2">Button</option>
+                <option value="3">Lamp</option>
+            </select>
+            <progress id="progress" value="0" max="100"></progress>
+        </div>
+        <div class="box-2">
+            <canvas id="canvas"></canvas>
+        </div>
+        <div class="box-1">
+        </div>
+    </div>
+    <script src="Resource/js/ImageLoader.js"></script>
+    <script src="Resource/js/Tile.js"></script>
+    <script src="Resource/js/TileMap.js"></script>
+    <script src="Resource/js/main.js"></script>
+</body>
+
+</html>

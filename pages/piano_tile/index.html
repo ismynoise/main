@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="canvas" style="margin: 0 auto; display: block; background: honeydew;"></canvas>
+    <script>
+        const canvas = document.getElementById("canvas");
+        const context = canvas.getContext("2d");
+        canvas.width = 400;
+        canvas.height = 600;
+
+        let update = setInterval(draw, 10);
+
+        let x = 0;
+        let y = 0;
+
+        canvas.addEventListener("mousedown", function (e) {
+            let clientX = e.clientX - canvas.offsetLeft;
+            let clientY = e.clientY - canvas.offsetTop;
+            // console.log(clientX, clientY);
+            tiles.forEach(function (item, i, tiles) {
+                // console.log(item.x, item.width);
+
+                if (clientX > item.x && clientX < item.width && clientY > item.y && clientY < item.height) {
+                    if (i === 0) {
+                        if (!tiles[0].isPres) {
+                            item.isPres = true;
+                        } else {
+                            clearInterval(update);
+                            gameOver(0);
+                        }
+                    } else {
+                        if (tiles[i - 1].isPres) {
+                            item.isPres = true;
+                        } else {
+                            clearInterval(update);
+                            gameOver(i - 1);
+                        }
+                    }
+                }
+            });
+        });
+
+        function tile(x = 0, y = 0) {
+            this.x = x * 100;
+            this.y = y * 140;
+            this.width = this.x + 100;
+            this.height = this.y + 140;
+            this.isPres = false;
+            this.spead = 4;
+            this.i = 0;
+            this.muve = function () {
+                this.y += this.spead;
+                this.height += this.spead;
+                // this.i++;
+                // if (this.i > 10) {
+                //     this.spead++;
+                //     this.i = 0;
+                // }
+            }
+            this.gameOver = function () {
+                this.y -= 140;
+                this.height -= 140;
+            }
+        }
+
+        let tiles = [];
+        tiles.push(new tile(getRandomInt(0, 4), -1));
+
+        function draw() {
+            clear();
+
+            if (tiles[tiles.length - 1].y === 0) {
+                tiles.push(new tile(getRandomInt(0, 4), -1));
+            }
+
+            tiles.forEach(function (item, i, tiles) {
+                if (item.isPres) {
+                    context.fillStyle = "grey";
+                } else {
+                    context.fillStyle = "black";
+                }
+                context.fillRect(item.x, item.y, 100, 140);
+                item.muve();
+            });
+
+            if (tiles[0].y > canvas.height) {
+                if (tiles[0].isPres) {
+                    tiles[0] = null;
+                    tiles.shift();
+                } else {
+                    clearInterval(update);
+                    gameOver(0);
+                }
+            }
+        }
+
+        function gameOver(tile) {
+            clear();
+
+            tiles.forEach(function (item, i, tiles) {
+                if (tile === 0) {
+                    item.gameOver();
+                }
+                if (item.isPres) {
+                    context.fillStyle = "grey";
+                } else {
+                    context.fillStyle = "black";
+                }
+                if (i === tile) {
+                    context.fillStyle = "red";
+                }
+                context.fillRect(item.x, item.y, 100, 140);
+                item.muve();
+            });
+
+        }
+
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min; //Максимум не включается, минимум включается
+        }
+
+
+        function clear() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    </script>
+</body>
+
+</html>
