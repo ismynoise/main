@@ -60,4 +60,14 @@
     background-color: #f3f3f3;
 }
 
-@media screen and (min-width: 640px) {}
+@media screen and (max-width: 600px) {
+    .heading {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .heading a {
+        margin: 0 90px;
+    }
+}
